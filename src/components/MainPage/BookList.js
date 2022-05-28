@@ -33,7 +33,6 @@ function BookList({ books }) {
             <div
               style={{
                 width: "147px", maxHeight: "213px",
-                border: "1px solid black",
                 margin: "10px 0 0 0",
                 textAlign: "left",
                 paddingLeft: "8px"
