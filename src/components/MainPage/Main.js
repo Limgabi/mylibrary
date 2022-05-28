@@ -39,8 +39,8 @@ function Main() {
   }
 
   return (
-    <>
-      <div style={{ margin: "0 auto", textAlign: "center" }}>
+    <div style={{margin: "32px auto", width: "80%"}}>
+      <div style={{textAlign: "center"}}>
         <h1>My Library</h1>
         <form onSubmit={onSubmit}>
           <input
@@ -59,7 +59,7 @@ function Main() {
             : null
         }
       </div>
-    </>
+    </div>
   )
 }
 

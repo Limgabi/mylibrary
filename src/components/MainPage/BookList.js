@@ -1,18 +1,63 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function BookList({books}) {
+function BookList({ books }) {
+  const navigate = useNavigate();
+
   return (
     <div style={{
       display: "flex",
       flexWrap: "wrap",
-      textAlign: "center"
+      justifyContent: "space-around",
+      margin: "25px auto",
+      border: "2px solid lightgray"
     }}>
       {
         books.map((book, idx) => (
-          <div key={idx} style={{width: "30%"}}>
-            <img src={book.thumbnail}/>
-            <p>{book.title}</p>
-            <p>{book.authors}</p>
+          <div key={idx}
+            style={{
+              // display: "flex",
+              // flexDirection: "column", 
+              // width: "33%", 
+              textAlign: "center",
+              marginTop: "3px",
+              alignItems: "center",
+              margin: "auto 8px",
+            }}>
+            <img
+              style={{ width: "150px", marginTop: "8px" }}
+              src={book.thumbnail}
+              alt={book.title}
+              onClick={() => navigate('/book/' + idx)}
+            />
+            <div
+              style={{
+                width: "147px", maxHeight: "213px",
+                border: "1px solid black",
+                margin: "10px 0 0 0",
+                textAlign: "left",
+                paddingLeft: "8px"
+              }}>
+              <p style={{
+                fontSize: '13px',
+                fontWeight: "bold",
+                color: "#333"
+              }}>{book.title}</p>
+
+              <p style={{
+                fontSize: '12px',
+              }}>
+                <span>{book.authors} 저</span>
+                <span style={{
+                  display: "block",
+                  marginTop: "3px",
+                }}>{book.publisher}</span>
+              </p>
+              <p style={{
+                fontSize: "14px",
+                fontWeight: "bold",
+              }}>{book.price}원</p>
+            </div>
           </div>
         ))
       }
