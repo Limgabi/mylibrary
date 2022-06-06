@@ -1,9 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function BookList({ books }) {
-  const navigate = useNavigate();
-
   return (
     <div style={{
       display: "flex",
@@ -28,7 +26,6 @@ function BookList({ books }) {
               style={{ width: "150px", marginTop: "8px" }}
               src={book.thumbnail}
               alt={book.title}
-              onClick={() => navigate('/book/' + idx)}
             />
             <div
               style={{
@@ -37,12 +34,12 @@ function BookList({ books }) {
                 textAlign: "left",
                 paddingLeft: "8px"
               }}>
-              <p style={{
+              <Link to={`/book/${book.isbn}`} state={{...book}}><p style={{
                 fontSize: '13px',
                 fontWeight: "bold",
                 color: "#333"
-              }}>{book.title}</p>
-
+              }}>{book.title}</p></Link>
+              
               <p style={{
                 fontSize: '12px',
               }}>
