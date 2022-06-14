@@ -3,11 +3,22 @@ import { bookSearch } from "../../api";
 import BookList from "./BookList";
 import style from "./Main.module.css";
 import { AiOutlineSearch } from "react-icons/ai";
+import Pagination from "./Pagination";
 
 function Main() {
   const [search, setSearch] = useState("");
   const [books, setBooks] = useState([]);
   const [query, setQuery] = useState('');
+  const [currPage, setCurrPage] = useState(1);
+  const [bookLimit, setBookLimit] = useState(10); // 한 페이지에 책 10개 
+
+  const idxOfLast = currPage * bookLimit;
+  const idxOfFirst = idxOfLast - bookLimit;
+  const currBooks = (books) => {
+    let currBooks = 0;
+    currBooks = books.slice(idxOfFirst, idxOfLast);
+    return currBooks;
+  }
 
   useEffect(() => {
     if (query.length > 0) {
@@ -20,13 +31,12 @@ function Main() {
       query: search,
       sort: 'accuracy',
       page: 1,
-      size: 10,
+      size: 50,
       target: 'title',
     };
     const { data } = await bookSearch(params);
     if (reset) {
       setBooks(data.documents);
-      console.log(books)
     } else {
       setBooks(books.concat(data.documents));
     }
@@ -58,7 +68,14 @@ function Main() {
       <div>
         {
           books.length > 0
-            ? <BookList books={books} />
+            ? (<>
+                <BookList books={currBooks(books)} />
+                <Pagination
+                  bookLimit={bookLimit}
+                  totalBooks={books.length}
+                  paginate={setCurrPage}
+                />
+              </>)
             : null
         }
       </div>

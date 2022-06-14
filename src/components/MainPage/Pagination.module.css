@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+  width: 320px;
+}
+.container span {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 50px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.container span:hover {
+  background-color: lightgray;
+}
