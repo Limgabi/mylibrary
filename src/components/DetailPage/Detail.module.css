@@ -1,0 +1,129 @@
+.container {
+  width: 75%;
+  margin: 80px auto;
+  padding: 16px;
+}
+
+.container::after {
+  display: block;
+  clear: both;
+  content: '';
+}
+
+.container .bookImg {
+  float: left;
+  margin-bottom: 30px;
+  box-shadow: 5px 5px 10px rgb(0 0 0 / 10%);
+}
+
+.container img {
+  margin: -1;
+  width: auto;
+  height: 360px;
+}
+
+.info {
+  margin-left: 280px;
+}
+
+.infoTop {
+  padding-bottom: 25px;
+  border-bottom: solid 1px #d8d8d8;
+}
+
+.title {
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.title h2 {
+  display: inline;
+  margin-right: 2px;
+  color: #333;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.title h3 {
+  display: inline;
+  margin-right: 1px;
+  color: #666;
+  font-size: 16px;
+  vertical-align: 2px;
+  font-weight: normal;
+}
+
+.auth {
+  display: block;
+  text-align: left;
+  line-height: 20px;
+  color: #666;
+}
+
+.author,
+.publisher,
+.datetime {
+  color: #666;
+}
+
+.auth em {
+  display: inline-block;
+  margin: 4px 4px 0 4px;
+  width: 1px;
+  height: 12px;
+  border-right: solid 1px #ccc;
+}
+
+.infoBottom table {
+  display: block;
+  table-layout: fixed;
+  border-collapse: collapse;
+  padding: 25px 0 25px 0;
+  border-bottom: solid 1px #d8d8d8;
+}
+
+table th {
+  padding: 6px 0 6px;
+  line-height: 18px;
+  color: #666;
+  font-weight: normal;
+  text-align: left;
+  vertical-align: top;
+}
+
+table td {
+  padding: 5px 0 6px;
+  min-height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  color: #666;
+  text-align: left;
+}
+
+.price th {
+  font-size: 12px;
+  color: rgb(85, 85, 85);
+  text-decoration: none;
+}
+
+.sale_price th {
+  font-weight: bold;
+  color: #333;
+}
+
+.sale_price td {
+  color: #ff6666;
+  font-size: 24px;
+}
+
+.sale_price span {
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+.summary {
+  padding-top: 32px;
+}
+.close {
+  display: none;
+}

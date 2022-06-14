@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 25px auto;
+  border: 2px solid lightgray;
+}
+
+.bookWrap {
+  margin: 3px 8px auto;
+  align-items: center;
+  text-align: center;
+}
+
+.bookWrap img {
+  width: 150px;
+  margin-top: 8px;
+}
+
+.bookInfo {
+  width: 147px;
+  max-height: 213px;
+  margin: 10px 0 0 0;
+  padding-left: 8px;
+  text-align: left;
+}
+.bookInfo .title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.bookInfo .publisher {
+  display: block;
+  margin-top: 3px;
+}
+.bookInfo .price {
+  font-size: 14px;
+  font-weight: bold;
+}

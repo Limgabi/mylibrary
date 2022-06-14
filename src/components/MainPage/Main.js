@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { bookSearch } from "../../api";
 import BookList from "./BookList";
+import style from "./Main.module.css";
 import { AiOutlineSearch } from "react-icons/ai";
 
 function Main() {
@@ -45,31 +46,13 @@ function Main() {
         <h1>My Library</h1>
         <form onSubmit={onSubmit}>
           <input
-            style={{
-              width: "300px",
-              height: "50px",
-              borderRadius: "5px",
-              display: "inline",
-              boxSizing: "borderBox",
-              outline: "none",
-              fontSize: "1em",
-              paddingLeft: "16px"
-            }}
+            className={style.searchBar}
             type="text"
             value={search}
             onChange={onChange}
             placeholder="책 이름을 입력하세요"
           />
-          <button style={{
-            backgroundColor: "inherit",
-            height: "50px",
-            border: "none",
-            padding: "8px 3px",
-            marginLeft: "-40px",
-            display: "inline",
-            boxSizing: "borderBox",
-            fontSize: "1em"
-          }}><AiOutlineSearch/></button>
+          <button className={style.searchBtn}><AiOutlineSearch/></button>
         </form>
       </div>
       <div>
