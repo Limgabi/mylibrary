@@ -7,6 +7,7 @@ import Detail from "./components/DetailPage/Detail";
 import Main from "./components/MainPage/Main";
 import NavBar from "./components/NavBar/NavBar";
 import Profile from "./components/ProfilePage/Profile";
+import Record from "./components/RecordPage/Record";
 
 
 function App() {
@@ -54,6 +55,8 @@ function App() {
             <Route path="/profile" element={<Profile isLoggedIn={Boolean(userObj)}
               userObj={userObj} />} />
             <Route path="/book/:id" element={<Detail isLoggedIn={Boolean(userObj)}
+              userObj={userObj} />} />
+            <Route path="/record" element={<Record isLoggedIn={Boolean(userObj)}
               userObj={userObj} />} />
           </Routes>
         </BrowserRouter>

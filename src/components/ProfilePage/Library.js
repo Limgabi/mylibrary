@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import style from "./Library.module.css";
 import { TiDeleteOutline } from "react-icons/ti";
+import { useNavigate } from 'react-router-dom';
 
 function Library({ userObj }) {
+  const navigate = useNavigate();
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -10,6 +12,14 @@ function Library({ userObj }) {
     setBooks(bookArr);
     console.log(userObj)
   }, []);
+
+  const onClickRecord = (title) => {
+    navigate('/record', {
+      state: {
+        title: title
+      }
+    })
+  }
 
   const onDelete = (idx) => {
     let bookarr = [...books];
@@ -29,7 +39,7 @@ function Library({ userObj }) {
               <p className={style.title}>{book.title}</p>
               <p className={style.author}>{book.author}</p>
               <div className={style.btn}>
-                <button className={style.recordBtn}>기록하기</button>
+                <button className={style.recordBtn} onClick={()=>onClickRecord(book.title)}>기록하기</button>
               </div>
             </div>
             <span className={style.deleteBtn} onClick={() => onDelete(idx)}><TiDeleteOutline size={24}/></span>
