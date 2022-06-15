@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import style from "./Detail.module.css"
 
-function Detail() {
+function Detail({ isLoggedIn }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,23 +18,29 @@ function Detail() {
   }
 
   const addMyLib = () => {
-    let bookObj = {
-      title: data.title,
-      img: data.thumbnail,
-      author: data.authors,
-      id: data.isbn
-    };
-
-    if (localStorage.length > 0) {
-      let books = JSON.parse(localStorage.getItem("books"));
-      let bookArr = [...books];
-      bookArr.push(bookObj);
-      localStorage.setItem('books', JSON.stringify(bookArr));
+    if (isLoggedIn) {
+      let bookObj = {
+        title: data.title,
+        img: data.thumbnail,
+        author: data.authors,
+        id: data.isbn
+      };
+  
+      if (localStorage.length > 0) {
+        let books = JSON.parse(localStorage.getItem("books"));
+        let bookArr = [...books];
+        bookArr.push(bookObj);
+        localStorage.setItem('books', JSON.stringify(bookArr));
+      } else {
+        localStorage.setItem('books', JSON.stringify([bookObj]));
+      }
+  
+      navigate('/profile');
     } else {
-      localStorage.setItem('books', JSON.stringify([bookObj]));
-    }
-
-    navigate('/profile');
+      if(window.confirm("로그인을 해주세요. 로그인 화면으로 이동합니다.")) {
+        navigate('/auth');
+      }
+    }  
   }
 
   return (

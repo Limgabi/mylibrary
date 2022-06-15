@@ -19,16 +19,3 @@
 .name {
   font-weight: 800;
 }
-
-.btn {
-  margin-top: 7px;
-}
-
-.btn button {
-  height: 38px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 700;
-  border: none;
-  width: 240px;
-}
