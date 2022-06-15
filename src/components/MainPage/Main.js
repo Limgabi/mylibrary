@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { bookSearch } from "../../api";
 import BookList from "./BookList";
+import Pagination from "./Pagination";
 import style from "./Main.module.css";
 import { AiOutlineSearch } from "react-icons/ai";
-import Pagination from "./Pagination";
 
 function Main() {
   const [search, setSearch] = useState("");
@@ -51,24 +51,24 @@ function Main() {
   }
 
   return (
-    <div style={{ margin: "32px auto", width: "80%" }}>
-      <div style={{ textAlign: "center" }}>
-        <h1>My Library</h1>
-        <form onSubmit={onSubmit}>
-          <input
-            className={style.searchBar}
-            type="text"
-            value={search}
-            onChange={onChange}
-            placeholder="책 이름을 입력하세요"
-          />
-          <button className={style.searchBtn}><AiOutlineSearch/></button>
-        </form>
-      </div>
-      <div>
-        {
-          books.length > 0
-            ? (<>
+    <>
+      <div style={{ margin: "32px auto", width: "80%" }}>
+        <div className={style.search}>
+          <form onSubmit={onSubmit}>
+            <input
+              className={style.searchBar}
+              type="text"
+              value={search}
+              onChange={onChange}
+              placeholder="책 이름을 입력하세요"
+            />
+            <button className={style.searchBtn}><AiOutlineSearch /></button>
+          </form>
+        </div>
+        <div>
+          {
+            books.length > 0
+              ? (<>
                 <BookList books={currBooks(books)} />
                 <Pagination
                   bookLimit={bookLimit}
@@ -76,10 +76,11 @@ function Main() {
                   paginate={setCurrPage}
                 />
               </>)
-            : null
-        }
+              : null
+          }
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
