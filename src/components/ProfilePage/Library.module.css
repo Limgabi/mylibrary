@@ -1,0 +1,74 @@
+.container {
+  width: 100%;
+  margin: 20px auto 40px;
+  padding: 16px 16px;
+}
+
+.container h2 {
+  margin: 0;
+  padding: 0 0 25px 30px;
+  border-bottom: 1px solid #d8d8d8;
+  text-align: left;
+}
+
+.book {
+  position: relative;
+  border-bottom: 1px solid #d8d8d8;
+  padding: auto;
+  text-align: left;
+}
+
+.book::after {
+  display: block;
+  clear: both;
+  content: '';
+}
+
+.bookImg {
+  padding: 20px 30px;
+  float: left;
+}
+
+.book img {
+  width: auto;
+  height: 108px;
+}
+
+.bookInfo {
+  margin-left: 130px;
+  padding-top: 20px;
+  align-items: center;
+}
+
+.bookInfo .title,
+.bookInfo .author {
+  margin: 0;
+}
+
+.bookInfo .title {
+  color: #333;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.bookInfo .author {
+  color: #666;
+}
+
+.recordBtn {
+  height: 38px;
+  border: none;
+  border-color: #199db3;
+  background-color: #199db3;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: bold;
+  padding: 0 12px;
+  margin-top: 20px;
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

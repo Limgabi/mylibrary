@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import style from "./Detail.module.css"
 
 function Detail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const location = useLocation();
   const data = location.state;
   const bookTitle = data.title.split(':');
@@ -11,12 +12,31 @@ function Detail() {
   const discountRate = Math.floor((data.price - data.sale_price) / data.price * 100);
 
   const [clickToggle, setClickToggle] = useState(false);
-  
+
   const handleToggle = () => {
     setClickToggle(!clickToggle);
   }
 
-  console.log(data);
+  const addMyLib = () => {
+    let bookObj = {
+      title: data.title,
+      img: data.thumbnail,
+      author: data.authors,
+      id: data.isbn
+    };
+
+    if (localStorage.length > 0) {
+      let books = JSON.parse(localStorage.getItem("books"));
+      let bookArr = [...books];
+      bookArr.push(bookObj);
+      localStorage.setItem('books', JSON.stringify(bookArr));
+    } else {
+      localStorage.setItem('books', JSON.stringify([bookObj]));
+    }
+
+    navigate('/profile');
+  }
+
   return (
     <div className={style.container}>
       <div className={style.bookImg}>
@@ -57,9 +77,13 @@ function Detail() {
           <div className={style.summary}>
             <span>{data.contents.substr(0, 130)}</span>
             {clickToggle && <span>{data.contents.substr(130)}</span>}
-            {data.contents.length > 130 && !clickToggle && 
-             <span style={{color: "#666", fontSize: "14px"}} onClick={handleToggle}>...더보기</span>
+            {data.contents.length > 130 && !clickToggle &&
+              <span style={{ color: "#666", fontSize: "14px" }} onClick={handleToggle}>...더보기</span>
             }
+          </div>
+          <div className={style.btns}>
+            <button className={style.addBtn} onClick={addMyLib}>내 서재에 추가</button>
+            <button className={style.recordBtn}>기록하기</button>
           </div>
         </div>
       </div>
