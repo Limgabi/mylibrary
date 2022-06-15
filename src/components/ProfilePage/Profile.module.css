@@ -16,6 +16,37 @@
   align-items: center;
 }
 
+.profile {
+  margin-bottom: 16px;
+}
+
+.profile img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+}
+
+.editInput {
+  width: 120px;
+  border: none;
+  outline: none;
+  border-bottom: 3px solid black;
+  font-size: 14px;
+}
+
 .name {
   font-weight: 800;
+}
+
+.btn {
+  margin-top: 7px;
+}
+
+.btn button {
+  height: 38px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  width: 240px;
 }

@@ -20,11 +20,16 @@ function App() {
         if (user.displayName === null) {
           const name = user.email.split("@")[0];
           user.displayName = name;
+        } 
+        if (user.photoURL === null) {
+          const basedURL = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+          user.photoURL = basedURL;
         }
         setUserObj({
           displayName: user.displayName,
           uid: user.uid,
-          updateProfile: (args) => updateProfile(user, { displayName: user.displayName }),
+          photoURL: user.photoURL,
+          updateProfile: (args) => updateProfile(user, { displayName: user.displayName, photoURL: user.photoURL }),
         });
       } else {
         setUserObj(null);
@@ -38,7 +43,8 @@ function App() {
     setUserObj({
       displayName: user.displayName,
       uid: user.uid,
-      updateProfile: (args) => updateProfile(user, { displayName: user.displayName }),
+      photoURL: user.photoURL,
+      updateProfile: (args) => updateProfile(user, { displayName: user.displayName, photoURL: user.photoURL }),
     });
   }
 
@@ -53,7 +59,7 @@ function App() {
             <Route path="/auth" element={<Auth isLoggedIn={Boolean(userObj)}
               userObj={userObj} />} />
             <Route path="/profile" element={<Profile isLoggedIn={Boolean(userObj)}
-              userObj={userObj} />} />
+              userObj={userObj} refreshUser={refreshUser}/>} />
             <Route path="/book/:id" element={<Detail isLoggedIn={Boolean(userObj)}
               userObj={userObj} />} />
             <Route path="/record" element={<Record isLoggedIn={Boolean(userObj)}

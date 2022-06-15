@@ -10,7 +10,6 @@ function Library({ userObj }) {
   useEffect(() => {
     const bookArr = JSON.parse(localStorage.getItem("books"));
     setBooks(bookArr);
-    console.log(userObj)
   }, []);
 
   const onClickRecord = (title) => {
