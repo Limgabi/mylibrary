@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { dbService } from "../../fbase";
+import { addDoc, collection } from "firebase/firestore";
 import style from "./Detail.module.css"
 
-function Detail({ isLoggedIn }) {
+function Detail({ isLoggedIn, userObj }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,30 +19,31 @@ function Detail({ isLoggedIn }) {
     setClickToggle(!clickToggle);
   }
 
-  const addMyLib = () => {
+  const addMyLib = async () => {
     if (isLoggedIn) {
       let bookObj = {
         title: data.title,
         img: data.thumbnail,
         author: data.authors,
-        id: data.isbn
+        isbn: data.isbn,
+        userId: userObj.uid,
+        userName: userObj.displayName
       };
-  
-      if (localStorage.length > 0) {
-        let books = JSON.parse(localStorage.getItem("books"));
-        let bookArr = [...books];
-        bookArr.push(bookObj);
-        localStorage.setItem('books', JSON.stringify(bookArr));
-      } else {
-        localStorage.setItem('books', JSON.stringify([bookObj]));
-      }
-  
+      await addDoc(collection(dbService, "books"), bookObj);
       navigate('/profile');
     } else {
       if(window.confirm("로그인을 해주세요. 로그인 화면으로 이동합니다.")) {
         navigate('/auth');
       }
     }  
+  }
+
+  const onClickRecord = (title) => {
+    navigate('/record', {
+      state: {
+        title: title
+      }
+    })
   }
 
   return (
@@ -89,7 +92,7 @@ function Detail({ isLoggedIn }) {
           </div>
           <div className={style.btns}>
             <button className={style.addBtn} onClick={addMyLib}>내 서재에 추가</button>
-            <button className={style.recordBtn}>기록하기</button>
+            <button className={style.recordBtn} onClick={()=>onClickRecord(data.title)}>기록하기</button>
           </div>
         </div>
       </div>

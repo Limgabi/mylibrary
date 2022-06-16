@@ -1,15 +1,25 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { collection, deleteDoc, doc, getDocs, onSnapshot, query, where } from 'firebase/firestore';
+import { dbService } from '../../fbase';
 import style from "./Library.module.css";
 import { TiDeleteOutline } from "react-icons/ti";
-import { useNavigate } from 'react-router-dom';
 
 function Library({ userObj }) {
   const navigate = useNavigate();
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    const bookArr = JSON.parse(localStorage.getItem("books"));
-    setBooks(bookArr);
+    const q = query(
+      collection(dbService, "books"),
+      where("userId", "==", userObj.uid));
+    onSnapshot(q, (snapshot) => {
+      const bookArr = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setBooks(bookArr);
+    })
   }, []);
 
   const onClickRecord = (title) => {
@@ -20,11 +30,17 @@ function Library({ userObj }) {
     })
   }
 
-  const onDelete = (idx) => {
-    let bookarr = [...books];
-    bookarr.splice(idx, 1);
-    setBooks(bookarr);
-    localStorage.setItem("books", JSON.stringify(bookarr));
+  const onDelete = async (uid, title) => {
+    const ok = window.confirm("해당 책을 📚에서 삭제하시겠습니까?");
+    const bookQuery = query(
+      collection(dbService, "books"),
+      where("userId", "==", uid),
+      where("title", "==", title));
+    if (ok) {
+      const data = await getDocs(bookQuery);
+      console.log(data.docs[0].ref);
+      await deleteDoc(data.docs[0].ref);
+    }
   }
 
   return (
@@ -41,7 +57,7 @@ function Library({ userObj }) {
                 <button className={style.recordBtn} onClick={()=>onClickRecord(book.title)}>기록하기</button>
               </div>
             </div>
-            <span className={style.deleteBtn} onClick={() => onDelete(idx)}><TiDeleteOutline size={24}/></span>
+            <span className={style.deleteBtn} onClick={() => onDelete(userObj.uid, book.title)}><TiDeleteOutline size={24}/></span>
           </div>
         ))
       }
