@@ -38,10 +38,11 @@ function Detail({ isLoggedIn, userObj }) {
     }  
   }
 
-  const onClickRecord = (title) => {
+  const onClickRecord = (title, img) => {
     navigate('/record', {
       state: {
-        title: title
+        title: title,
+        img: img
       }
     })
   }
@@ -92,7 +93,7 @@ function Detail({ isLoggedIn, userObj }) {
           </div>
           <div className={style.btns}>
             <button className={style.addBtn} onClick={addMyLib}>내 서재에 추가</button>
-            <button className={style.recordBtn} onClick={()=>onClickRecord(data.title)}>기록하기</button>
+            <button className={style.recordBtn} onClick={()=>onClickRecord(data.title, data.thumbnail)}>기록하기</button>
           </div>
         </div>
       </div>

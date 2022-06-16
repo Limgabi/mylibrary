@@ -22,10 +22,11 @@ function Library({ userObj }) {
     })
   }, []);
 
-  const onClickRecord = (title) => {
+  const onClickRecord = (title, img) => {
     navigate('/record', {
       state: {
-        title: title
+        title: title,
+        img: img
       }
     })
   }
@@ -53,7 +54,7 @@ function Library({ userObj }) {
               <p className={style.title}>{book.title}</p>
               <p className={style.author}>{book.author}</p>
               <div className={style.btn}>
-                <button className={style.recordBtn} onClick={()=>onClickRecord(book.title)}>기록하기</button>
+                <button className={style.recordBtn} onClick={()=>onClickRecord(book.title, book.img)}>기록하기</button>
               </div>
             </div>
             <span className={style.deleteBtn} onClick={() => onDelete(userObj.uid, book.title)}><MdOutlineClose size={24}/></span>
