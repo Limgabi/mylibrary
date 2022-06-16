@@ -3,6 +3,7 @@ import { authService, storageService } from '../../fbase';
 import { updateProfile } from 'firebase/auth';
 import { deleteObject, getDownloadURL, ref, uploadString } from 'firebase/storage';
 import Library from './Library';
+import Records from './Records';
 import style from "./Profile.module.css";
 import { HiPencil } from "react-icons/hi";
 import { MdOutlineClose } from "react-icons/md"
@@ -119,6 +120,7 @@ function Profile({ userObj, refreshUser }) {
         </div>
       </div>
       <Library userObj={userObj} />
+      <Records userObj={userObj} />
     </div>
   );
 }

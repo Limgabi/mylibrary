@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, deleteDoc, doc, getDocs, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, deleteDoc, getDocs, onSnapshot, query, where } from 'firebase/firestore';
 import { dbService } from '../../fbase';
 import style from "./Library.module.css";
-import { TiDeleteOutline } from "react-icons/ti";
+import { MdOutlineClose } from "react-icons/md";
 
 function Library({ userObj }) {
   const navigate = useNavigate();
@@ -38,7 +38,6 @@ function Library({ userObj }) {
       where("title", "==", title));
     if (ok) {
       const data = await getDocs(bookQuery);
-      console.log(data.docs[0].ref);
       await deleteDoc(data.docs[0].ref);
     }
   }
@@ -57,7 +56,7 @@ function Library({ userObj }) {
                 <button className={style.recordBtn} onClick={()=>onClickRecord(book.title)}>기록하기</button>
               </div>
             </div>
-            <span className={style.deleteBtn} onClick={() => onDelete(userObj.uid, book.title)}><TiDeleteOutline size={24}/></span>
+            <span className={style.deleteBtn} onClick={() => onDelete(userObj.uid, book.title)}><MdOutlineClose size={24}/></span>
           </div>
         ))
       }
