@@ -18,6 +18,7 @@
 
 .profile {
   margin-bottom: 16px;
+  position: relative;
 }
 
 .profile img {
@@ -39,7 +40,7 @@
 }
 
 .btn {
-  margin-top: 7px;
+  margin-top: 16px;
 }
 
 .btn button {
@@ -50,3 +51,19 @@
   border: none;
   width: 240px;
 }
+
+.deleteImg {
+  position: absolute;
+  right: 120px;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.btnContainer button {
+  width: 50px;
+  margin-right: 8px;
+}
+
